@@ -18,11 +18,8 @@
 const Server = require("./src/js/server.js")
 const dbSetup = require("./src/js/repository/db.js")
 const DefinitionRepository = require("./src/js/repository/definitionrepository.js")
-dbSetup.then((sequelize) => {
-    const definitionrepository = new DefinitionRepository(sequelize)
-    definitionrepository.findAll("hat").then((value) => {
-        console.log(JSON.stringify(value))
-    })
+dbSetup.then((db) => {
+    const definitionrepository = new DefinitionRepository(db)
 })
 const server = new Server()
 server.setupRouting()

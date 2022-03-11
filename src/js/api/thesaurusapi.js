@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-const ThesaurusEntryApiModel = require("./thesaurusentryapimodel.js")
-const PartOfSpeechApi = require("./partofspeechapi.js")
+const toApi = require("./mapping/thesaurusentrymapping.js")
 
 class ThesaurusApi {
     constructor(service) {
@@ -25,23 +24,7 @@ class ThesaurusApi {
 
     async findAll(word) {
         const results = await this.service.findAll(word)
-        return results.map(value => new ThesaurusEntryApiModel
-            (
-                this._toPartOfSpeechApi(value.partOfSpeech),
-                value.synonyms,
-                value.antonyms
-            )
-        )
-    }
-
-    _toPartOfSpeechApi = (partOfSpeechService) => {
-        switch (partOfSpeechService) {
-            case PartOfSpeechService.ADJECTIVE: return PartOfSpeechApi.ADJECTIVE
-            case PartOfSpeechService.NOUN: return PartOfSpeechApi.NOUN
-            case PartOfSpeechService.ADVERB: return PartOfSpeechApi.ADVERB
-            case PartOfSpeechService.VERB: return PartOfSpeechApi.VERB
-            default: return PartOfSpeechApi.UNKNOWN
-        }
+        return results.map(value => toApi(value))
     }
 }
 

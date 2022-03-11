@@ -15,17 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-const toApi = require("./mapping/definitionmapping.js")
+PartOfSpeechService = require("../../service/partofspeechservice")
+PartOfSpeechApi = require("../partofspeechapi.js")
 
-class DefinitionApi {
-    constructor(service) {
-        this.service = service
-    }
-
-    async findAll(word) {
-        const results = await this.service.findAll(word)
-        return results.map(value => toApi(value))
+toApi = (partOfSpeechService) => {
+    switch (partOfSpeechService) {
+        case PartOfSpeechService.ADJECTIVE: return PartOfSpeechApi.ADJECTIVE
+        case PartOfSpeechService.NOUN: return PartOfSpeechApi.NOUN
+        case PartOfSpeechService.ADVERB: return PartOfSpeechApi.ADVERB
+        case PartOfSpeechService.VERB: return PartOfSpeechApi.VERB
+        default: return PartOfSpeechApi.UNKNOWN
     }
 }
 
-module.exports = DefinitionApi
+module.exports = toApi

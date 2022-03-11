@@ -48,6 +48,7 @@ class Oas {
         http.get({ port: this.port, path: "/rhymes?word=dove&page=2&size=10" })
         http.get({ port: this.port, path: "/thesaurus?word=hell&page=1&size=10" })
         http.get({ port: this.port, path: "/definitions?word=baffled&page=1&size=10" })
+        http.get({ port: this.port, path: "/wotd?before=2022-03-10&size=14" })
     }
 }
 

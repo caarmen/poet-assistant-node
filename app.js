@@ -30,6 +30,10 @@ const DefinitionRepository = require("./src/js/repository/definitionrepository.j
 const DefinitionService = require("./src/js/service/definitionservice.js")
 const DefinitionApi = require("./src/js/api/definitionapi.js")
 
+const WotdRepository = require("./src/js/repository/wotdrepository.js")
+const WotdService = require("./src/js/service/wotdservice.js")
+const WotdApi = require("./src/js/api/wotdapi.js")
+
 dbSetup.then((db) => {
     const rhymeRepository = new RhymeRepository(db)
     const rhymeService = new RhymeService(rhymeRepository)
@@ -43,7 +47,11 @@ dbSetup.then((db) => {
     const definitionService = new DefinitionService(definitionRepository)
     const definitionApi = new DefinitionApi(definitionService)
 
-    const server = new Server(rhymeApi, thesaurusApi, definitionApi)
+    const wotdRepository = new WotdRepository(db)
+    const wotdService = new WotdService(wotdRepository)
+    const wotdApi = new WotdApi(wotdService)
+
+    const server = new Server(rhymeApi, thesaurusApi, definitionApi, wotdApi)
     server.setupRouting()
     server.startServer()
 })

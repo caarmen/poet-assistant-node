@@ -262,6 +262,57 @@
         },
         "tags": []
       }
+    },
+    "/wotd": {
+      "get": {
+        "summary": "/wotd",
+        "parameters": [
+          {
+            "name": "before",
+            "in": "query",
+            "example": "2022-03-10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "example": "14",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string"
+                      },
+                      "word": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "date",
+                      "word"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
     }
   },
   "tags": [],

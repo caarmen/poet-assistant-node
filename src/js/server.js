@@ -16,16 +16,13 @@
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
 const { application } = require('express')
-const RhymeApi = require("./api/rhymeapi.js")
-const ThesaurusApi = require("./api/thesaurusapi.js")
-const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
 const Paginator = require("./paginator")
 const Oas = require("./oas")
 
 class Server {
 
-    constructor(rhymeApi, thesaurusApi, definitionApi) {
+    constructor(rhymeApi, thesaurusApi, definitionApi, wotdApi) {
         this.app = express()
         this.port = process.env.PORT || 3000
         this.oas = new Oas(this.app, this.port)
@@ -33,6 +30,7 @@ class Server {
         this.rhymeApi = rhymeApi
         this.thesaurusApi = thesaurusApi
         this.definitionApi = definitionApi
+        this.wotdApi = wotdApi
         this.paginator = new Paginator()
     }
 
@@ -55,6 +53,13 @@ class Server {
             .get((req, res, next) => {
                 this.definitionApi.findAll(req.query.word).then((results) => {
                     res.send(JSON.stringify(this.paginator.paginate(req, results)))
+                    next()
+                })
+            })
+        this.app.route("/wotd")
+            .get((req, res, next) => {
+                this.wotdApi.findAll(req.query.before, req.query.size).then((results) => {
+                    res.send(JSON.stringify(results))
                     next()
                 })
             })

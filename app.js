@@ -17,24 +17,33 @@
 
 const Server = require("./src/js/server.js")
 const dbSetup = require("./src/js/repository/db.js")
-const DefinitionRepository = require("./src/js/repository/definitionrepository.js")
-const DefinitionService = require("./src/js/service/definitionservice.js")
-const DefinitionApi = require("./src/js/api/definitionapi.js")
+
+const RhymeRepository = require("./src/js/repository/rhymerepository.js")
+const RhymeService = require("./src/js/service/rhymeservice.js")
+const RhymeApi = require("./src/js/api/rhymeapi.js")
 
 const ThesaurusRepository = require("./src/js/repository/thesaurusrepository.js")
 const ThesaurusService = require("./src/js/service/thesaurusservice.js")
 const ThesaurusApi = require("./src/js/api/thesaurusapi.js")
 
+const DefinitionRepository = require("./src/js/repository/definitionrepository.js")
+const DefinitionService = require("./src/js/service/definitionservice.js")
+const DefinitionApi = require("./src/js/api/definitionapi.js")
+
 dbSetup.then((db) => {
-    const definitionRepository = new DefinitionRepository(db)
-    const definitionService = new DefinitionService(definitionRepository)
-    const definitionApi = new DefinitionApi(definitionService)
+    const rhymeRepository = new RhymeRepository(db)
+    const rhymeService = new RhymeService(rhymeRepository)
+    const rhymeApi = new RhymeApi(rhymeService)
 
     const thesaurusRepository = new ThesaurusRepository(db)
     const thesaurusService = new ThesaurusService(thesaurusRepository)
     const thesaurusApi = new ThesaurusApi(thesaurusService)
 
-    const server = new Server(definitionApi, thesaurusApi)
+    const definitionRepository = new DefinitionRepository(db)
+    const definitionService = new DefinitionService(definitionRepository)
+    const definitionApi = new DefinitionApi(definitionService)
+
+    const server = new Server(rhymeApi, thesaurusApi, definitionApi)
     server.setupRouting()
     server.startServer()
 })

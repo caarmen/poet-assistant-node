@@ -16,29 +16,37 @@
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
 const { application } = require('express')
-const DefinitionApi = require("./api/definitionapi.js")
+const RhymeApi = require("./api/rhymeapi.js")
 const ThesaurusApi = require("./api/thesaurusapi.js")
+const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
 
 class Server {
 
-    constructor(definitionApi, thesaurusApi) {
+    constructor(rhymeApi, thesaurusApi, definitionApi) {
         this.app = express()
         this.port = process.env.PORT || 3000
-        this.definitionApi = definitionApi
+        this.rhymeApi = rhymeApi
         this.thesaurusApi = thesaurusApi
+        this.definitionApi = definitionApi
     }
 
     setupRouting() {
-        this.app.route("/definitions")
+        this.app.route("/rhymes")
             .get((req, res) => {
-                this.definitionApi.findAll(req.query.word).then((results) => {
+                this.rhymeApi.findAll(req.query.word).then((results) => {
                     res.send(JSON.stringify(results))
                 })
             })
         this.app.route("/thesaurus")
             .get((req, res) => {
                 this.thesaurusApi.findAll(req.query.word).then((results) => {
+                    res.send(JSON.stringify(results))
+                })
+            })
+        this.app.route("/definitions")
+            .get((req, res) => {
+                this.definitionApi.findAll(req.query.word).then((results) => {
                     res.send(JSON.stringify(results))
                 })
             })

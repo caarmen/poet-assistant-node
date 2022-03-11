@@ -22,6 +22,7 @@ const ThesaurusApi = require("./api/thesaurusapi.js")
 const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
 const Paginator = require("./paginator")
+const Crawler = require("./crawler")
 
 class Server {
 
@@ -63,6 +64,8 @@ class Server {
     startServer = () => {
         this.app.listen(this.port, () => {
             console.log(`Listening on http://localhost:${this.port}`)
+            const crawler = new Crawler()
+            crawler.crawl(this.port)
         })
     }
 }

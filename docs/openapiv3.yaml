@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "poetassistant",
+    "version": "1.0.0",
+    "license": {
+      "name": "GPL-3.0"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\nREST API for English-language tools for writing poetry"
+  },
+  "paths": {
+    "/rhymes": {
+      "get": {
+        "summary": "/rhymes",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "query",
+            "example": "dove",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "example": "20",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "next": {
+                      "type": "string",
+                      "example": "http://localhost:3000/rhymes?word=dove&page=2&size=20"
+                    },
+                    "count": {
+                      "type": "number",
+                      "example": 20
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "syllables_type": {
+                            "type": "string"
+                          },
+                          "syllables": {
+                            "type": "string"
+                          },
+                          "word": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "syllables_type",
+                          "syllables",
+                          "word"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "syllables_type": "stress_syllables",
+                          "syllables": "AHV",
+                          "word": "above"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    },
+    "/thesaurus": {
+      "get": {
+        "summary": "/thesaurus",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "query",
+            "example": "happy",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "part_of_speech": {
+                            "type": "string"
+                          },
+                          "synonyms": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "antonyms": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "part_of_speech",
+                          "synonyms",
+                          "antonyms"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "part_of_speech": "adjective",
+                          "synonyms": [
+                            "blessed",
+                            "blissful",
+                            "bright",
+                            "cheerful",
+                            "content",
+                            "contented",
+                            "elated",
+                            "euphoric",
+                            "felicitous",
+                            "glad",
+                            "golden",
+                            "halcyon",
+                            "joyful",
+                            "joyous",
+                            "laughing",
+                            "prosperous",
+                            "riant"
+                          ],
+                          "antonyms": [
+                            "unhappy"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    },
+    "/definitions": {
+      "get": {
+        "summary": "/definitions",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "query",
+            "example": "baffle",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "part_of_speech": {
+                            "type": "string"
+                          },
+                          "definition": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "part_of_speech",
+                          "definition"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "part_of_speech": "noun",
+                          "definition": "a flat plate that controls or directs the flow of fluid or energy"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    }
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ]
+}

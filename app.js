@@ -24,11 +24,7 @@ dbSetup.then((db) => {
     const definitionRepository = new DefinitionRepository(db)
     const definitionService = new DefinitionService(definitionRepository)
     const definitionApi = new DefinitionApi(definitionService)
-
-    definitionApi.findAll("dog").then((value) => {
-        console.log("result: " + JSON.stringify(value))
-    })
+    const server = new Server(definitionApi)
+    server.setupRouting()
+    server.startServer()
 })
-const server = new Server()
-server.setupRouting()
-server.startServer()

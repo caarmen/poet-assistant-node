@@ -16,19 +16,24 @@
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
 const { application } = require('express')
+const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
 
 class Server {
 
-    constructor() {
+    constructor(definitionApi) {
         this.app = express()
         this.port = process.env.PORT || 3000
+        this.definitionApi = definitionApi
     }
 
     setupRouting() {
-        this.app.get("/", (req, res) => {
-            res.send("Hello World!")
-        })
+        this.app.route("/definitions")
+            .get((req, res) => {
+                this.definitionApi.findAll(req.query.word).then((results) => {
+                    res.send(JSON.stringify(results))
+                })
+            })
     }
 
     startServer = () => {

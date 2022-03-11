@@ -24,7 +24,7 @@
           {
             "name": "page",
             "in": "query",
-            "example": "1",
+            "example": "2",
             "schema": {
               "type": "integer"
             }
@@ -32,7 +32,7 @@
           {
             "name": "size",
             "in": "query",
-            "example": "20",
+            "example": "10",
             "schema": {
               "type": "integer"
             }
@@ -48,11 +48,15 @@
                   "properties": {
                     "next": {
                       "type": "string",
-                      "example": "http://localhost:3000/rhymes?word=dove&page=2&size=20"
+                      "example": "http://localhost:3000/rhymes?word=dove&page=3&size=10"
+                    },
+                    "previous": {
+                      "type": "string",
+                      "example": "http://localhost:3000/rhymes?word=dove&page=1&size=10"
                     },
                     "count": {
                       "type": "number",
-                      "example": 20
+                      "example": 10
                     },
                     "results": {
                       "type": "array",
@@ -78,8 +82,8 @@
                       "example": [
                         {
                           "syllables_type": "stress_syllables",
-                          "syllables": "AHV",
-                          "word": "above"
+                          "syllables": "OWV",
+                          "word": "nov"
                         }
                       ]
                     }
@@ -99,9 +103,25 @@
           {
             "name": "word",
             "in": "query",
-            "example": "happy",
+            "example": "hell",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "example": "10",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -115,7 +135,7 @@
                   "properties": {
                     "count": {
                       "type": "number",
-                      "example": 4
+                      "example": 6
                     },
                     "results": {
                       "type": "array",
@@ -146,29 +166,17 @@
                       },
                       "example": [
                         {
-                          "part_of_speech": "adjective",
+                          "part_of_speech": "noun",
                           "synonyms": [
-                            "blessed",
-                            "blissful",
-                            "bright",
-                            "cheerful",
-                            "content",
-                            "contented",
-                            "elated",
-                            "euphoric",
-                            "felicitous",
-                            "glad",
-                            "golden",
-                            "halcyon",
-                            "joyful",
-                            "joyous",
-                            "laughing",
-                            "prosperous",
-                            "riant"
+                            "hell on earth",
+                            "hellhole",
+                            "inferno",
+                            "part",
+                            "region",
+                            "snake pit",
+                            "the pits"
                           ],
-                          "antonyms": [
-                            "unhappy"
-                          ]
+                          "antonyms": []
                         }
                       ]
                     }
@@ -188,9 +196,25 @@
           {
             "name": "word",
             "in": "query",
-            "example": "baffle",
+            "example": "baffled",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "example": "10",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -204,7 +228,7 @@
                   "properties": {
                     "count": {
                       "type": "number",
-                      "example": 4
+                      "example": 2
                     },
                     "results": {
                       "type": "array",
@@ -225,8 +249,8 @@
                       },
                       "example": [
                         {
-                          "part_of_speech": "noun",
-                          "definition": "a flat plate that controls or directs the flow of fluid or energy"
+                          "part_of_speech": "adjective",
+                          "definition": "perplexed by many conflicting situations or statements; filled with bewilderment"
                         }
                       ]
                     }

@@ -16,20 +16,20 @@
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
 const { application } = require('express')
-const expressOasGenerator = require('express-oas-generator')
 const RhymeApi = require("./api/rhymeapi.js")
 const ThesaurusApi = require("./api/thesaurusapi.js")
 const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
 const Paginator = require("./paginator")
-const Crawler = require("./crawler")
+const Oas = require("./oas")
 
 class Server {
 
     constructor(rhymeApi, thesaurusApi, definitionApi) {
         this.app = express()
-        expressOasGenerator.handleResponses(this.app, { ignoredNodeEnvironments: [] })
         this.port = process.env.PORT || 3000
+        this.oas = new Oas(this.app, this.port)
+        this.oas.handleResponses()
         this.rhymeApi = rhymeApi
         this.thesaurusApi = thesaurusApi
         this.definitionApi = definitionApi
@@ -58,14 +58,13 @@ class Server {
                     next()
                 })
             })
-        expressOasGenerator.handleRequests()
+        this.oas.handleRequests()
     }
 
     startServer = () => {
         this.app.listen(this.port, () => {
             console.log(`Listening on http://localhost:${this.port}`)
-            const crawler = new Crawler()
-            crawler.crawl(this.port)
+            this.oas.crawl()
         })
     }
 }

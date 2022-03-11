@@ -851,18 +851,22 @@ ul.nav-tabs {
   "properties" : {
     "next" : {
       "type" : "string",
-      "example" : "http://localhost:3000/rhymes?word=dove&page=2&size=20"
+      "example" : "http://localhost:3000/rhymes?word=dove&page=3&size=10"
+    },
+    "previous" : {
+      "type" : "string",
+      "example" : "http://localhost:3000/rhymes?word=dove&page=1&size=10"
     },
     "count" : {
       "type" : "number",
-      "example" : 20
+      "example" : 10
     },
     "results" : {
       "type" : "array",
       "example" : [ {
         "syllables_type" : "stress_syllables",
-        "syllables" : "AHV",
-        "word" : "above"
+        "syllables" : "OWV",
+        "word" : "nov"
       } ],
       "items" : {
         "$ref" : "#/components/schemas/inline_response_200_results"
@@ -875,14 +879,14 @@ ul.nav-tabs {
   "properties" : {
     "count" : {
       "type" : "number",
-      "example" : 4
+      "example" : 6
     },
     "results" : {
       "type" : "array",
       "example" : [ {
-        "part_of_speech" : "adjective",
-        "synonyms" : [ "blessed", "blissful", "bright", "cheerful", "content", "contented", "elated", "euphoric", "felicitous", "glad", "golden", "halcyon", "joyful", "joyous", "laughing", "prosperous", "riant" ],
-        "antonyms" : [ "unhappy" ]
+        "part_of_speech" : "noun",
+        "synonyms" : [ "hell on earth", "hellhole", "inferno", "part", "region", "snake pit", "the pits" ],
+        "antonyms" : [ ]
       } ],
       "items" : {
         "$ref" : "#/components/schemas/inline_response_200_1_results"
@@ -916,13 +920,13 @@ ul.nav-tabs {
   "properties" : {
     "count" : {
       "type" : "number",
-      "example" : 4
+      "example" : 2
     },
     "results" : {
       "type" : "array",
       "example" : [ {
-        "part_of_speech" : "noun",
-        "definition" : "a flat plate that controls or directs the flow of fluid or energy"
+        "part_of_speech" : "adjective",
+        "definition" : "perplexed by many conflicting situations or statements; filled with bewilderment"
       } ],
       "items" : {
         "$ref" : "#/components/schemas/inline_response_200_2_results"
@@ -1045,7 +1049,7 @@ ul.nav-tabs {
                           <div class="tab-pane active" id="examples-Default-definitionsGet-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: text/html" \
- "http://localhost:3000/definitions?word=baffle"
+ "http://localhost:3000/definitions?word=baffled&page=1&size=10"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-definitionsGet-0-java">
@@ -1062,10 +1066,12 @@ public class DefaultApiExample {
 
         // Create an instance of the API class
         DefaultApi apiInstance = new DefaultApi();
-        String word = baffle; // String | 
+        String word = baffled; // String | 
+        Integer page = 1; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
-            inline_response_200_2 result = apiInstance.definitionsGet(word);
+            inline_response_200_2 result = apiInstance.definitionsGet(word, page, size);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#definitionsGet");
@@ -1082,10 +1088,12 @@ public class DefaultApiExample {
 public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        String word = baffle; // String | 
+        String word = baffled; // String | 
+        Integer page = 1; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
-            inline_response_200_2 result = apiInstance.definitionsGet(word);
+            inline_response_200_2 result = apiInstance.definitionsGet(word, page, size);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#definitionsGet");
@@ -1103,10 +1111,14 @@ public class DefaultApiExample {
 
 // Create an instance of the API class
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
-String *word = baffle; //  (optional) (default to null)
+String *word = baffled; //  (optional) (default to null)
+Integer *page = 1; //  (optional) (default to null)
+Integer *size = 10; //  (optional) (default to null)
 
 // /definitions
 [apiInstance definitionsGetWith:word
+    page:page
+    size:size
               completionHandler: ^(inline_response_200_2 output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
@@ -1124,7 +1136,9 @@ String *word = baffle; //  (optional) (default to null)
 // Create an instance of the API class
 var api = new Poetassistant.DefaultApi()
 var opts = {
-  'word': baffle // {String} 
+  'word': baffled, // {String} 
+  'page': 1, // {Integer} 
+  'size': 10 // {Integer} 
 };
 
 var callback = function(error, data, response) {
@@ -1157,11 +1171,13 @@ namespace Example
 
             // Create an instance of the API class
             var apiInstance = new DefaultApi();
-            var word = baffle;  // String |  (optional)  (default to null)
+            var word = baffled;  // String |  (optional)  (default to null)
+            var page = 1;  // Integer |  (optional)  (default to null)
+            var size = 10;  // Integer |  (optional)  (default to null)
 
             try {
                 // /definitions
-                inline_response_200_2 result = apiInstance.definitionsGet(word);
+                inline_response_200_2 result = apiInstance.definitionsGet(word, page, size);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling DefaultApi.definitionsGet: " + e.Message );
@@ -1178,10 +1194,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$word = baffle; // String | 
+$word = baffled; // String | 
+$page = 1; // Integer | 
+$size = 10; // Integer | 
 
 try {
-    $result = $api_instance->definitionsGet($word);
+    $result = $api_instance->definitionsGet($word, $page, $size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->definitionsGet: ', $e->getMessage(), PHP_EOL;
@@ -1196,10 +1214,12 @@ use WWW::OPenAPIClient::DefaultApi;
 
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $word = baffle; # String | 
+my $word = baffled; # String | 
+my $page = 1; # Integer | 
+my $size = 10; # Integer | 
 
 eval {
-    my $result = $api_instance->definitionsGet(word => $word);
+    my $result = $api_instance->definitionsGet(word => $word, page => $page, size => $size);
     print Dumper($result);
 };
 if ($@) {
@@ -1216,11 +1236,13 @@ from pprint import pprint
 
 # Create an instance of the API class
 api_instance = openapi_client.DefaultApi()
-word = baffle # String |  (optional) (default to null)
+word = baffled # String |  (optional) (default to null)
+page = 1 # Integer |  (optional) (default to null)
+size = 10 # Integer |  (optional) (default to null)
 
 try:
     # /definitions
-    api_response = api_instance.definitions_get(word=word)
+    api_response = api_instance.definitions_get(word=word, page=page, size=size)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DefaultApi->definitionsGet: %s\n" % e)</code></pre>
@@ -1230,10 +1252,12 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
 
 pub fn main() {
-    let word = baffle; // String
+    let word = baffled; // String
+    let page = 1; // Integer
+    let size = 10; // Integer
 
     let mut context = DefaultApi::Context::default();
-    let result = client.definitionsGet(word, &context).wait();
+    let result = client.definitionsGet(word, page, size, &context).wait();
 
     println!("{:?}", result);
 }
@@ -1267,6 +1291,40 @@ pub fn main() {
             <div class="primitive">
                 <span class="type">
                     String
+                </span>
+
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">page</td>
+<td>
+
+
+    <div id="d2e199_definitionsGet_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">size</td>
+<td>
+
+
+    <div id="d2e199_definitionsGet_size">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
                 </span>
 
             </div>
@@ -1382,7 +1440,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-Default-rhymesGet-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: text/html" \
- "http://localhost:3000/rhymes?word=dove&page=1&size=20"
+ "http://localhost:3000/rhymes?word=dove&page=2&size=10"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-rhymesGet-0-java">
@@ -1400,8 +1458,8 @@ public class DefaultApiExample {
         // Create an instance of the API class
         DefaultApi apiInstance = new DefaultApi();
         String word = dove; // String | 
-        Integer page = 1; // Integer | 
-        Integer size = 20; // Integer | 
+        Integer page = 2; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
             inline_response_200 result = apiInstance.rhymesGet(word, page, size);
@@ -1422,8 +1480,8 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         String word = dove; // String | 
-        Integer page = 1; // Integer | 
-        Integer size = 20; // Integer | 
+        Integer page = 2; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
             inline_response_200 result = apiInstance.rhymesGet(word, page, size);
@@ -1445,8 +1503,8 @@ public class DefaultApiExample {
 // Create an instance of the API class
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 String *word = dove; //  (optional) (default to null)
-Integer *page = 1; //  (optional) (default to null)
-Integer *size = 20; //  (optional) (default to null)
+Integer *page = 2; //  (optional) (default to null)
+Integer *size = 10; //  (optional) (default to null)
 
 // /rhymes
 [apiInstance rhymesGetWith:word
@@ -1470,8 +1528,8 @@ Integer *size = 20; //  (optional) (default to null)
 var api = new Poetassistant.DefaultApi()
 var opts = {
   'word': dove, // {String} 
-  'page': 1, // {Integer} 
-  'size': 20 // {Integer} 
+  'page': 2, // {Integer} 
+  'size': 10 // {Integer} 
 };
 
 var callback = function(error, data, response) {
@@ -1505,8 +1563,8 @@ namespace Example
             // Create an instance of the API class
             var apiInstance = new DefaultApi();
             var word = dove;  // String |  (optional)  (default to null)
-            var page = 1;  // Integer |  (optional)  (default to null)
-            var size = 20;  // Integer |  (optional)  (default to null)
+            var page = 2;  // Integer |  (optional)  (default to null)
+            var size = 10;  // Integer |  (optional)  (default to null)
 
             try {
                 // /rhymes
@@ -1528,8 +1586,8 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\DefaultApi();
 $word = dove; // String | 
-$page = 1; // Integer | 
-$size = 20; // Integer | 
+$page = 2; // Integer | 
+$size = 10; // Integer | 
 
 try {
     $result = $api_instance->rhymesGet($word, $page, $size);
@@ -1548,8 +1606,8 @@ use WWW::OPenAPIClient::DefaultApi;
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
 my $word = dove; # String | 
-my $page = 1; # Integer | 
-my $size = 20; # Integer | 
+my $page = 2; # Integer | 
+my $size = 10; # Integer | 
 
 eval {
     my $result = $api_instance->rhymesGet(word => $word, page => $page, size => $size);
@@ -1570,8 +1628,8 @@ from pprint import pprint
 # Create an instance of the API class
 api_instance = openapi_client.DefaultApi()
 word = dove # String |  (optional) (default to null)
-page = 1 # Integer |  (optional) (default to null)
-size = 20 # Integer |  (optional) (default to null)
+page = 2 # Integer |  (optional) (default to null)
+size = 10 # Integer |  (optional) (default to null)
 
 try:
     # /rhymes
@@ -1586,8 +1644,8 @@ except ApiException as e:
 
 pub fn main() {
     let word = dove; // String
-    let page = 1; // Integer
-    let size = 20; // Integer
+    let page = 2; // Integer
+    let size = 10; // Integer
 
     let mut context = DefaultApi::Context::default();
     let result = client.rhymesGet(word, page, size, &context).wait();
@@ -1773,7 +1831,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-Default-thesaurusGet-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: text/html" \
- "http://localhost:3000/thesaurus?word=happy"
+ "http://localhost:3000/thesaurus?word=hell&page=1&size=10"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-thesaurusGet-0-java">
@@ -1790,10 +1848,12 @@ public class DefaultApiExample {
 
         // Create an instance of the API class
         DefaultApi apiInstance = new DefaultApi();
-        String word = happy; // String | 
+        String word = hell; // String | 
+        Integer page = 1; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
-            inline_response_200_1 result = apiInstance.thesaurusGet(word);
+            inline_response_200_1 result = apiInstance.thesaurusGet(word, page, size);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#thesaurusGet");
@@ -1810,10 +1870,12 @@ public class DefaultApiExample {
 public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        String word = happy; // String | 
+        String word = hell; // String | 
+        Integer page = 1; // Integer | 
+        Integer size = 10; // Integer | 
 
         try {
-            inline_response_200_1 result = apiInstance.thesaurusGet(word);
+            inline_response_200_1 result = apiInstance.thesaurusGet(word, page, size);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#thesaurusGet");
@@ -1831,10 +1893,14 @@ public class DefaultApiExample {
 
 // Create an instance of the API class
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
-String *word = happy; //  (optional) (default to null)
+String *word = hell; //  (optional) (default to null)
+Integer *page = 1; //  (optional) (default to null)
+Integer *size = 10; //  (optional) (default to null)
 
 // /thesaurus
 [apiInstance thesaurusGetWith:word
+    page:page
+    size:size
               completionHandler: ^(inline_response_200_1 output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
@@ -1852,7 +1918,9 @@ String *word = happy; //  (optional) (default to null)
 // Create an instance of the API class
 var api = new Poetassistant.DefaultApi()
 var opts = {
-  'word': happy // {String} 
+  'word': hell, // {String} 
+  'page': 1, // {Integer} 
+  'size': 10 // {Integer} 
 };
 
 var callback = function(error, data, response) {
@@ -1885,11 +1953,13 @@ namespace Example
 
             // Create an instance of the API class
             var apiInstance = new DefaultApi();
-            var word = happy;  // String |  (optional)  (default to null)
+            var word = hell;  // String |  (optional)  (default to null)
+            var page = 1;  // Integer |  (optional)  (default to null)
+            var size = 10;  // Integer |  (optional)  (default to null)
 
             try {
                 // /thesaurus
-                inline_response_200_1 result = apiInstance.thesaurusGet(word);
+                inline_response_200_1 result = apiInstance.thesaurusGet(word, page, size);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling DefaultApi.thesaurusGet: " + e.Message );
@@ -1906,10 +1976,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$word = happy; // String | 
+$word = hell; // String | 
+$page = 1; // Integer | 
+$size = 10; // Integer | 
 
 try {
-    $result = $api_instance->thesaurusGet($word);
+    $result = $api_instance->thesaurusGet($word, $page, $size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->thesaurusGet: ', $e->getMessage(), PHP_EOL;
@@ -1924,10 +1996,12 @@ use WWW::OPenAPIClient::DefaultApi;
 
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $word = happy; # String | 
+my $word = hell; # String | 
+my $page = 1; # Integer | 
+my $size = 10; # Integer | 
 
 eval {
-    my $result = $api_instance->thesaurusGet(word => $word);
+    my $result = $api_instance->thesaurusGet(word => $word, page => $page, size => $size);
     print Dumper($result);
 };
 if ($@) {
@@ -1944,11 +2018,13 @@ from pprint import pprint
 
 # Create an instance of the API class
 api_instance = openapi_client.DefaultApi()
-word = happy # String |  (optional) (default to null)
+word = hell # String |  (optional) (default to null)
+page = 1 # Integer |  (optional) (default to null)
+size = 10 # Integer |  (optional) (default to null)
 
 try:
     # /thesaurus
-    api_response = api_instance.thesaurus_get(word=word)
+    api_response = api_instance.thesaurus_get(word=word, page=page, size=size)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DefaultApi->thesaurusGet: %s\n" % e)</code></pre>
@@ -1958,10 +2034,12 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
 
 pub fn main() {
-    let word = happy; // String
+    let word = hell; // String
+    let page = 1; // Integer
+    let size = 10; // Integer
 
     let mut context = DefaultApi::Context::default();
-    let result = client.thesaurusGet(word, &context).wait();
+    let result = client.thesaurusGet(word, page, size, &context).wait();
 
     println!("{:?}", result);
 }
@@ -1995,6 +2073,40 @@ pub fn main() {
             <div class="primitive">
                 <span class="type">
                     String
+                </span>
+
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">page</td>
+<td>
+
+
+    <div id="d2e199_thesaurusGet_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">size</td>
+<td>
+
+
+    <div id="d2e199_thesaurusGet_size">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
                 </span>
 
             </div>

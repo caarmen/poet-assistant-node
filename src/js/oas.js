@@ -16,8 +16,28 @@
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
 const http = require('http')
+const expressOasGenerator = require('express-oas-generator')
 
-class Crawler {
+class Oas {
+
+    constructor(app, port) {
+        this.app = app
+        this.port = port
+    }
+    handleResponses() {
+        const server = process.env.SERVER
+        let predefinedSpec = {}
+        if (server) {
+            predefinedSpec = { servers: [{ url: server }] }
+        }
+        expressOasGenerator.handleResponses(this.app, {
+            ignoredNodeEnvironments: [],
+            predefinedSpec: predefinedSpec
+        })
+    }
+    handleRequests() {
+        expressOasGenerator.handleRequests()
+    }
 
     crawl(port) {
         // Execute the endpoints so swagger will display correct values
@@ -25,10 +45,10 @@ class Crawler {
         // Important! In order to get description of all parameters and JSON payloads
         // you have to start using your REST API or run REST API tests against it so
         // module can analyze requests/responses
-        http.get({ port: port, path: "/rhymes?word=dove&page=2&size=10" })
-        http.get({ port: port, path: "/thesaurus?word=hell&page=1&size=10" })
-        http.get({ port: port, path: "/definitions?word=baffled&page=1&size=10" })
+        http.get({ port: this.port, path: "/rhymes?word=dove&page=2&size=10" })
+        http.get({ port: this.port, path: "/thesaurus?word=hell&page=1&size=10" })
+        http.get({ port: this.port, path: "/definitions?word=baffled&page=1&size=10" })
     }
 }
 
-module.exports = Crawler
+module.exports = Oas

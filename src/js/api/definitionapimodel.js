@@ -17,7 +17,7 @@
 
 function DefinitionApiModel(word, partOfSpeech, definition) {
     this.word = word
-    this.partOfSpeech = partOfSpeech
+    this.part_of_speech = partOfSpeech
     this.definition = definition
 }
 

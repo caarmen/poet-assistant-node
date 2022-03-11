@@ -15,17 +15,5 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-const Server = require("./src/js/server.js")
-const dbSetup = require("./src/js/repository/db.js")
-const DefinitionRepository = require("./src/js/repository/definitionrepository.js")
-const DefinitionService = require("./src/js/service/definitionservice.js")
-dbSetup.then((db) => {
-    const definitionrepository = new DefinitionRepository(db)
-    const definitionService = new DefinitionService(definitionrepository)
-    definitionService.findAll("dog").then((value) => {
-        console.log("result: " + JSON.stringify(value))
-    })
-})
-const server = new Server()
-server.setupRouting()
-server.startServer()
+PartOfSpeechService = Object.freeze({ ADJECTIVE: 0, ADVERB: 1, NOUN: 2, VERB: 3 })
+module.exports = PartOfSpeechService

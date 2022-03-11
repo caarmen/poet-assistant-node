@@ -26,7 +26,6 @@ class DefinitionService {
     async findAll(word) {
         const results = await this.repository.findAll(word)
         return results.map(value => new DefinitionServiceModel(
-            value.word,
             this._toPartOfSpeechService(value.partOfSpeech),
             value.definition)
         )

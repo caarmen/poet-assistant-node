@@ -26,7 +26,6 @@ class DefinitionApi {
     async findAll(word) {
         const results = await this.service.findAll(word)
         return results.map(value => new DefinitionApiModel(
-            value.word,
             this._toPartOfSpeechApi(value.partOfSpeech),
             value.definition)
         )

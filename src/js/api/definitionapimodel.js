@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-function DefinitionApiModel(word, partOfSpeech, definition) {
-    this.word = word
+function DefinitionApiModel(partOfSpeech, definition) {
     this.part_of_speech = partOfSpeech
     this.definition = definition
 }

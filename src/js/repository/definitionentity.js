@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-function DefinitionEntity(word, partOfSpeech, definition) {
-    this.word = word
+function DefinitionEntity(partOfSpeech, definition) {
     this.partOfSpeech = partOfSpeech
     this.definition = definition
 }

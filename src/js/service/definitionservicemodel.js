@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-function DefinitionServiceModel(word, partOfSpeech, definition) {
-    this.word = word
+function DefinitionServiceModel(partOfSpeech, definition) {
     this.partOfSpeech = partOfSpeech
     this.definition = definition
 }

@@ -10,4 +10,4 @@ Poet Assistant REST api using Node.js (with Express framework)
 TODO
 
 ## Test it out
-TODO
+The server is deployed on heroku: https://poet-assistant-node.herokuapp.com

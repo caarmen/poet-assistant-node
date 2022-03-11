@@ -27,7 +27,7 @@ class Server {
 
     constructor(rhymeApi, thesaurusApi, definitionApi) {
         this.app = express()
-        expressOasGenerator.handleResponses(this.app, {})
+        expressOasGenerator.handleResponses(this.app, { ignoredNodeEnvironments: [] })
         this.port = process.env.PORT || 3000
         this.rhymeApi = rhymeApi
         this.thesaurusApi = thesaurusApi

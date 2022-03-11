@@ -23,16 +23,14 @@ class ThesaurusService {
         this.repository = repository
     }
 
-    async findAll(word) {
-        const results = await this.repository.findAll(word)
-        return results.map(value => new ThesaurusEntryServiceModel
-            (
+    findAll = async (word) => (await this.repository.findAll(word))
+        .map(value =>
+            new ThesaurusEntryServiceModel(
                 this._toPartOfSpeechService(value.partOfSpeech),
                 this._toList(value.synonyms),
                 this._toList(value.antonyms),
             )
         )
-    }
 
     _toList = (csvString) => csvString.split(",").filter(item => item != "").sort()
 

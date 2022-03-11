@@ -23,13 +23,11 @@ class DefinitionService {
         this.repository = repository
     }
 
-    async findAll(word) {
-        const results = await this.repository.findAll(word)
-        return results.map(value => new DefinitionServiceModel(
+    findAll = async (word) => (await this.repository.findAll(word))
+        .map(value => new DefinitionServiceModel(
             this._toPartOfSpeechService(value.partOfSpeech),
             value.definition)
         )
-    }
 
     _toPartOfSpeechService = (partOfSpeechString) => {
         switch (partOfSpeechString) {

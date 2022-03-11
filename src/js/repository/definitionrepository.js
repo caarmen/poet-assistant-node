@@ -35,15 +35,12 @@ class DefinitionRepository {
         })
     }
 
-    async findAll(word) {
-        const results = await this.model.findAll({
-            attributes: ['part_of_speech', 'definition'],
-            where: {
-                word: word
-            }
-        })
-        return results.map(value => new DefinitionEntity(value.part_of_speech, value.definition))
-    }
+    findAll = async (word) => (await this.model.findAll({
+        attributes: ['part_of_speech', 'definition'],
+        where: {
+            word: word
+        }
+    })).map(value => new DefinitionEntity(value.part_of_speech, value.definition))
 }
 
 module.exports = DefinitionRepository

@@ -22,10 +22,7 @@ class ThesaurusApi {
         this.service = service
     }
 
-    async findAll(word) {
-        const results = await this.service.findAll(word)
-        return results.map(value => toApi(value))
-    }
+    findAll = async (word) => (await this.service.findAll(word)).map(value => toApi(value))
 }
 
 module.exports = ThesaurusApi

@@ -22,16 +22,13 @@ class RhymeService {
         this.repository = repository
     }
 
-    async findAll(word) {
-        const results = await this.repository.findAll(word)
-        return results.map(value => new RhymeServiceModel
-            (
-                value.syllablesType,
-                value.syllables,
-                value.word
-            )
+    findAll = async (word) => (await this.repository.findAll(word)).map(value =>
+        new RhymeServiceModel(
+            value.syllablesType,
+            value.syllables,
+            value.word
         )
-    }
+    )
 }
 
 module.exports = RhymeService

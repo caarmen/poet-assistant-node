@@ -38,15 +38,12 @@ class ThesaurusRepository {
         })
     }
 
-    async findAll(word) {
-        const results = await this.model.findAll({
-            attributes: ['word_type', 'synonyms', 'antonyms'],
-            where: {
-                word: word
-            }
-        })
-        return results.map(value => new ThesaurusEntity(value.word_type, value.synonyms, value.antonyms))
-    }
+    findAll = async (word) => (await this.model.findAll({
+        attributes: ['word_type', 'synonyms', 'antonyms'],
+        where: {
+            word: word
+        }
+    })).map(value => new ThesaurusEntity(value.word_type, value.synonyms, value.antonyms))
 }
 
 module.exports = ThesaurusRepository

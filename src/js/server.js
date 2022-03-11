@@ -20,6 +20,7 @@ const RhymeApi = require("./api/rhymeapi.js")
 const ThesaurusApi = require("./api/thesaurusapi.js")
 const DefinitionApi = require("./api/definitionapi.js")
 const express = require('express')
+const Paginator = require("./paginator")
 
 class Server {
 
@@ -29,25 +30,26 @@ class Server {
         this.rhymeApi = rhymeApi
         this.thesaurusApi = thesaurusApi
         this.definitionApi = definitionApi
+        this.paginator = new Paginator()
     }
 
     setupRouting() {
         this.app.route("/rhymes")
             .get((req, res) => {
                 this.rhymeApi.findAll(req.query.word).then((results) => {
-                    res.send(JSON.stringify(results))
+                    res.send(JSON.stringify(this.paginator.paginate(req, results)))
                 })
             })
         this.app.route("/thesaurus")
             .get((req, res) => {
                 this.thesaurusApi.findAll(req.query.word).then((results) => {
-                    res.send(JSON.stringify(results))
+                    res.send(JSON.stringify(this.paginator.paginate(req, results)))
                 })
             })
         this.app.route("/definitions")
             .get((req, res) => {
                 this.definitionApi.findAll(req.query.word).then((results) => {
-                    res.send(JSON.stringify(results))
+                    res.send(JSON.stringify(this.paginator.paginate(req, results)))
                 })
             })
     }

@@ -21,8 +21,8 @@ const DefinitionRepository = require("./src/js/repository/definitionrepository.j
 const DefinitionService = require("./src/js/service/definitionservice.js")
 const DefinitionApi = require("./src/js/api/definitionapi.js")
 dbSetup.then((db) => {
-    const definitionrepository = new DefinitionRepository(db)
-    const definitionService = new DefinitionService(definitionrepository)
+    const definitionRepository = new DefinitionRepository(db)
+    const definitionService = new DefinitionService(definitionRepository)
     const definitionApi = new DefinitionApi(definitionService)
 
     definitionApi.findAll("dog").then((value) => {

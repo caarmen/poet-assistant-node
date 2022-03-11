@@ -10,6 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "express": "^4.17.3",
-    "sequelize": "^6.17.0"
+    "sequelize": "^6.17.0",
+    "sqlite3": "^4.2.0"
   }
 }

@@ -15,32 +15,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-const DefinitionServiceModel = require("./definitionservicemodel.js")
-const PartOfSpeechService = require("./partofspeechservice.js")
+const DefinitionApiModel = require("./definitionapimodel.js")
+const PartOfSpeechApi = require("./partofspeechapi.js")
 
-class DefinitionService {
-    constructor(repository) {
-        this.repository = repository
+class DefinitionApi {
+    constructor(service) {
+        this.service = service
     }
 
     async findAll(word) {
-        const results = await this.repository.findAll(word)
-        return results.map(value => new DefinitionServiceModel(
+        const results = await this.service.findAll(word)
+        return results.map(value => new DefinitionApiModel(
             value.word,
-            this._toPartOfSpeechService(value.partOfSpeech),
+            this._toPartOfSpeechApi(value.partOfSpeech),
             value.definition)
         )
     }
 
-    _toPartOfSpeechService = (partOfSpeechString) => {
-        switch (partOfSpeechString) {
-            case 'a': return PartOfSpeechService.ADJECTIVE
-            case 'n': return PartOfSpeechService.NOUN
-            case 'r': return PartOfSpeechService.ADVERB
-            case 'v': return PartOfSpeechService.VERB
-            default: return PartOfSpeechService.UNKNOWN
+    _toPartOfSpeechApi = (partOfSpeechService) => {
+        switch (partOfSpeechService) {
+            case PartOfSpeechService.ADJECTIVE: return PartOfSpeechApi.ADJECTIVE
+            case PartOfSpeechService.NOUN: return PartOfSpeechApi.NOUN
+            case PartOfSpeechService.ADVERB: return PartOfSpeechApi.ADVERB
+            case PartOfSpeechService.VERB: return PartOfSpeechApi.VERB
+            default: return PartOfSpeechApi.UNKNOWN
         }
     }
 }
 
-module.exports = DefinitionService
+module.exports = DefinitionApi

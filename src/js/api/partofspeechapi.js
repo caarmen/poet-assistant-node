@@ -15,5 +15,5 @@
 // You should have received a copy of the GNU General Public License
 // along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 
-PartOfSpeechService = Object.freeze({ ADJECTIVE: 0, ADVERB: 1, NOUN: 2, VERB: 3, UNKNOWN: 4 })
-module.exports = PartOfSpeechService
+PartOfSpeechApi = Object.freeze({ ADJECTIVE: "adjective", ADVERB: "adverb", NOUN: "noun", VERB: "verb", UNKNOWn: "unknown" })
+module.exports = PartOfSpeechApi

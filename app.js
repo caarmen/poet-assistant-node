@@ -19,10 +19,13 @@ const Server = require("./src/js/server.js")
 const dbSetup = require("./src/js/repository/db.js")
 const DefinitionRepository = require("./src/js/repository/definitionrepository.js")
 const DefinitionService = require("./src/js/service/definitionservice.js")
+const DefinitionApi = require("./src/js/api/definitionapi.js")
 dbSetup.then((db) => {
     const definitionrepository = new DefinitionRepository(db)
     const definitionService = new DefinitionService(definitionrepository)
-    definitionService.findAll("dog").then((value) => {
+    const definitionApi = new DefinitionApi(definitionService)
+
+    definitionApi.findAll("dog").then((value) => {
         console.log("result: " + JSON.stringify(value))
     })
 })

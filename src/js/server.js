@@ -17,20 +17,28 @@
 
 const { application } = require('express')
 const DefinitionApi = require("./api/definitionapi.js")
+const ThesaurusApi = require("./api/thesaurusapi.js")
 const express = require('express')
 
 class Server {
 
-    constructor(definitionApi) {
+    constructor(definitionApi, thesaurusApi) {
         this.app = express()
         this.port = process.env.PORT || 3000
         this.definitionApi = definitionApi
+        this.thesaurusApi = thesaurusApi
     }
 
     setupRouting() {
         this.app.route("/definitions")
             .get((req, res) => {
                 this.definitionApi.findAll(req.query.word).then((results) => {
+                    res.send(JSON.stringify(results))
+                })
+            })
+        this.app.route("/thesaurus")
+            .get((req, res) => {
+                this.thesaurusApi.findAll(req.query.word).then((results) => {
                     res.send(JSON.stringify(results))
                 })
             })

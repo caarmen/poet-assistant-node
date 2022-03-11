@@ -39,7 +39,7 @@ class Oas {
         expressOasGenerator.handleRequests()
     }
 
-    crawl(port) {
+    crawl() {
         // Execute the endpoints so swagger will display correct values
         // https://github.com/mpashkovskiy/express-oas-generator#how-to-use
         // Important! In order to get description of all parameters and JSON payloads
